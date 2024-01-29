@@ -16,14 +16,16 @@ export class ActionMarkComponent {
     id: '',
     first_name: '',
     last_name: '',
-    age: '',
+    // age: '',
     email: '',
     phone_number: '',
-    gender: '',
-    image: '',
-    proffesion: '',
-    location: '',
-    mark: ''
+    day_of_birth: '',
+    password: '',
+    // gender: '',
+    // image: '',
+    // proffesion: '',
+    // location: '',
+    // mark: ''
   };
 
   mark: string = '';
@@ -50,7 +52,7 @@ export class ActionMarkComponent {
   }
 
   OnUserLogout() {
-    this.auth.logout();
+    // this.auth.logout();
   }
 
   OnResetedForm(){
@@ -62,8 +64,8 @@ export class ActionMarkComponent {
       console.log('Please select');
       return;
     }
-    this.studentObj.mark = this.mark;
-    this.DataService.addStudent(this.studentObj);
+    // this.studentObj.mark = this.mark;
+    // this.DataService.addStudent(this.studentObj);
     this.OnResetedForm();
     //console.warn("Student added:" + this.studentObj.first_name + ' ' + this.studentObj.last_name)
   }//ocena sie dodaje wraz ze zmienna ale tworzy sie nowy uzytkownik    PROBLEM

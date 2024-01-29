@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,8 +11,9 @@ export class LoginComponent implements OnInit {
 
   email : string = '';
   password : string = '';
+  errorMessage: string = '';
 
-  constructor(private auth : AuthService) { }
+  constructor(private auth : AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -26,12 +28,24 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-  this.auth.login(this.email, this.password);
+  this.auth.login({email: this.email, password: this.password}).subscribe({
+
+    next: (response) => {
+      const token = response.access;
+      this.auth.saveToken(token);
+      this.router.navigate(['/dashboard']);
+
+    },
+    error: (error) => {
+      console.error('Login failed', error);
+      this.errorMessage = 'Invalide email or password';
+    }
+  })
 
   this.email = '';
   this.password = '';
   }
   OnSignInWithGoogle(){
-    this.auth.googleSignIn();
+    // this.auth.googleSignIn();
   }
 }

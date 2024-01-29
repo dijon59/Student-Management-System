@@ -39,6 +39,6 @@ export class ViewStudentComponent implements OnInit {
   }
 
   OnUserLogout(){
-    this.auth.logout();
+    // this.auth.logout();
   }
 }

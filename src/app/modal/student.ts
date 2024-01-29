@@ -1,14 +1,10 @@
 export class Student {
   id : string;
+  email : string;
   first_name : string;
   last_name : string;
-  age : string;
-  email : string;
-  phone_number : string;
-  gender : string;
-  image : string;
-  proffesion : string;
-  location : string;
-  mark : string;
-  //mark,homework,announcements etc.
+  day_of_birth: string;
+  phone_number : string; 
+  password: string;
 }
+// fields = ('id','email','first_name','last_name', 'day_of_birth', 'phone_number', 'password', 'password_confirmation')

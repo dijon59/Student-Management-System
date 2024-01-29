@@ -3,132 +3,68 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { GoogleAuthProvider } from '@angular/fire/auth';
 import { ToastService } from './toastr.service';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private apiUrl = 'http://127.0.0.1:8000/api/'
 
-  constructor(private fireauth: AngularFireAuth, private router: Router, private toastr: ToastService) { }
-  message: string = ''
+  constructor(private http: HttpClient) { }
 
-  //Login notifications
-
-  OnShowLoginSuccess(){
-   this.toastr.showLoginSucces();
-  }
-
-  OnShowLoginError(){
-    this.toastr.showLoginError();
-  }
-
-  OnShowLoginInfo(){
-    this.toastr.showLoginInfo();
-  }
-
-  //Register notifications
-
-   OnShowRegistrationSuccess(){
-    this.toastr.showRegistrationSucces();
-   }
-
-   OnShowRegistrationWarning(){
-     this.toastr.showRegistrationWarning();
-  }
-
-  //Logout notification
-
-  OnShowUserLoggedOutInfo(){
-    this.toastr.showUserLoggedOutInfo();
- }
-
-   //Forgot password notification
-
-   OnShowForgotPasswordInfo(){
-    this.toastr.showForgotPasswordInfo();
- }
-
- OnShowForgotPasswordError(){
-  this.toastr.showForgotPasswordError();
-}
   //login method
 
-  login(email : string, password : string): void {
-    this.fireauth.signInWithEmailAndPassword(email,password).then( res => {
-        localStorage.setItem('token','true');
-
-        if(res.user?.emailVerified == true){
-          this.OnShowLoginSuccess();
-          this.router.navigate(['dashboard']);
-        } else{
-          this.router.navigate(['login']);
-          this.OnShowLoginInfo();
-        }
-
-    }, err => {
-        this.OnShowLoginError();
-        this.router.navigate(['/login']);
-    })
+  login(data): Observable<any> {
+    return this.http.post(this.apiUrl + 'login/', data);
   }
+
+  saveToken(token: string): void {
+    localStorage.setItem('access', token);
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem('access');
+  }
+
+  logout(): void {
+    localStorage.removeItem('access');
+  }
+
+  isAuthenticated(): boolean {
+    // Check if the token exists and is not expired
+    const token = this.getToken();
+    return !!token;
+  }
+
+  // students
+
+  addStudent(data, token): Observable<any> {
+    return this.http.post(this.apiUrl + 'students/', data, {headers: { Authorization: 'Bearer ' + token}});
+  }
+
+  fetchStudents(token: string): Observable<any> {
+    return this.http.get(this.apiUrl, { headers: { Authorization: 'Bearer ' + token}});
+  }
+
+  fetchSpecificStudent(studentId, token: string): Observable<any> {
+    return this.http.get(this.apiUrl + 'student/');
+  }
+
+
 
  //register method
 
- register(email : string, password : string) {
-  this.fireauth.createUserWithEmailAndPassword(email, password).then( res => {
-    this.OnShowForgotPasswordInfo();
-    this.OnShowRegistrationSuccess();
-    this.sendEmailForVarification(res.user);
-    this.router.navigate(['/login']);
-  }, err => {
-    this.OnShowRegistrationWarning();
-    this.router.navigate(['/register']);
-  })
-}
-
  //sign out method
 
-  logout() {
-    this.OnShowUserLoggedOutInfo();
-    this.fireauth.signOut().then(() =>{
-      localStorage.removeItem('token');
-      this.router.navigate(['/login']);
-    }, err => {
-      alert(err.message);
-    })
-  }
-
-  //forgot password method
-
- forgotPassword(email : string){
-    this.fireauth.sendPasswordResetEmail(email).then(() => {
-      this.OnShowForgotPasswordInfo();
-      this.router.navigate(['/login']);
-    }, err => {
-      this.OnShowForgotPasswordError();
-    })
- }
-
-
-  //email varification
-  sendEmailForVarification(user : any) {
-    console.log(user);
-    user.sendEmailVerification().then((res : any) => {
-      this.router.navigate(['/login']);
-    }, (err : any) => {
-      this.OnShowForgotPasswordError();
-    })
-  }
-
-    //sign in with google
-    googleSignIn() {
-      return this.fireauth.signInWithPopup(new GoogleAuthProvider).then(res => {
-
-        this.router.navigate(['/dashboard']);
-        localStorage.setItem('token',JSON.stringify(res.user?.uid));
-        this.OnShowRegistrationSuccess();
-
-      }, err => {
-        this.OnShowRegistrationWarning();
-      })
-    }
+  // logout() {
+  //   this.OnShowUserLoggedOutInfo();
+  //   this.fireauth.signOut().then(() =>{
+  //     localStorage.removeItem('token');
+  //     this.router.navigate(['/login']);
+  //   }, err => {
+  //     alert(err.message);
+  //   })
 }

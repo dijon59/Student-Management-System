@@ -1,1 +1,19 @@
 
+.login-box {
+    /* From https://css.glass */
+    background: rgba(7, 16, 4, 0.62);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(4.8px);
+    -webkit-backdrop-filter: blur(4.8px);
+    border: 1px solid rgba(7, 16, 4, 1);
+    /* From https://css.glass */
+    background: rgba(7, 16, 4, 0.62);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(4.8px);
+    -webkit-backdrop-filter: blur(4.8px);
+    border: 1px solid rgba(7, 16, 4, 1);
+    
+      }
+    

@@ -14,28 +14,20 @@ export class AddStudentComponent implements OnInit {
   studentsList: Student[] = [];
   studentObj: Student = {
     id: '',
+    email: '',
     first_name: '',
     last_name: '',
-    age: '',
-    email: '',
+    day_of_birth: '',
     phone_number: '',
-    gender: '',
-    image: '',
-    proffesion: '',
-    location: '',
-    mark: ''
+    password: '',
   };
   id: string = '';
   first_name: string = '';
   last_name: string = '';
-  age: string = '';
   email: string = '';
   phone_number: string = '';
-  gender: string = '';
-  image: string = '';
-  proffesion: string = '';
-  location: string = '';
-  mark: string = '';
+  day_of_birth: '';
+  password: '';
 
 
   constructor(private auth: AuthService, private DataService: DataService, private toastr: ToastService) { }
@@ -54,40 +46,37 @@ export class AddStudentComponent implements OnInit {
 
   }
   OnUserLogout() {
-    this.auth.logout();
+    // this.auth.logout();
   }
 
   OnResetedForm(){
     this.first_name = '',
     this.last_name = '',
-    this.age = '',
     this.email = '',
     this.phone_number = ''
-    this.gender = ''
-    this.image = ''
-    this.proffesion = ''
-    this.location = ''
   }
 
   OnAddedStudent() {
-    if (this.first_name == '' || this.last_name == '' || this.age == '' || this.email == '' || this.phone_number == '' || this.gender == '' || this.image == '' || this.proffesion == ''  || this.location == '' ) {
-      this.OnShowAddedStudentWarning();
-      return;
-    }
     this.studentObj.id = '';
     this.studentObj.first_name = this.first_name;
     this.studentObj.last_name = this.last_name;
-    this.studentObj.age = this.age;
     this.studentObj.email = this.email;
     this.studentObj.phone_number = this.phone_number;
-    this.studentObj.gender = this.gender;
-    this.studentObj.image = this.image;
-    this.studentObj.proffesion = this.proffesion;
-    this.studentObj.location = this.location;
+    this.studentObj.password = this.password;
 
-    this.DataService.addStudent(this.studentObj);
-    this.OnShowAddedStudentSuccess();
-    this.OnResetedForm();
+    var token = this.auth.getToken()
+    this.DataService.addStudent(this.studentObj, token).subscribe({
+
+      next: (response) => {
+        console.log(response);
+      },
+      error: (error) => {
+        console.error('Login failed', error);
+        // this.errorMessage = 'Invalide email or password';
+      }
+    });
+    // this.OnShowAddedStudentSuccess();
+    // this.OnResetedForm();
     //console.warn("Student added:" + this.studentObj.first_name + ' ' + this.studentObj.last_name)
   }
 }

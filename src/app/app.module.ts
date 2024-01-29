@@ -24,7 +24,7 @@ import { ViewStudentComponent } from './view-student/view-student.component';
 import { AddMarkComponent } from './add-mark/add-mark.component';
 import { ShowMarkComponent } from './show-mark/show-mark.component';
 import { AddMarkkComponent } from './add-markk/add-markk.component';
-
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -56,6 +56,7 @@ import { AddMarkkComponent } from './add-markk/add-markk.component';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     NgbModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -62,7 +62,7 @@ export class ShowMarkComponent {
   }
 
   OnUserLogout(){
-    this.auth.logout();
+    // this.auth.logout();
   }
 
   OnAddedMark() {

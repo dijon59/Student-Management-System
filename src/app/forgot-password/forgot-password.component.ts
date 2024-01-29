@@ -13,7 +13,7 @@ export class ForgotPasswordComponent {
   constructor(private auth : AuthService) { }
 
   OnForgotPassword(){
-    this.auth.forgotPassword(this.email);
+    // this.auth.forgotPassword(this.email);
     this.email = '';
   }
 }

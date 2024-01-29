@@ -22,7 +22,7 @@ export class StudentListComponent implements OnInit {
     this.OnGotAllStudents();
   }
   OnUserLogout() {
-    this.auth.logout();
+    // this.auth.logout();
   }
 
   //notifications

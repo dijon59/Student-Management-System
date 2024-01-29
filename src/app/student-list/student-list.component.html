@@ -100,36 +100,36 @@
                       </td>
                       <td class="title">
                         <div class="thumb">
-                          <img class="img-fluid" src="{{Student.image}}" alt="">
+                          <!-- <img class="img-fluid" src="{{}}" alt=""> -->
                         </div>
                         <div class="student-list-details">
                           <div class="student-list-info">
                             <div class="student-list-title">
-                              <h5 class="mb-0">{{Student.first_name}} {{Student.last_name}}</h5>
+                              <h5 class="mb-0"></h5>
                             </div>
                             <div class="student-list-option">
                               <ul class="list-unstyled">
-                                <li><i class="bi bi-telephone-fill"
-                                    style="font-size: 1rem; color:rgb(240, 240, 64);"></i> {{Student.phone_number}}</li>
-                                <li><i class="bi bi-info-circle-fill"
-                                    style="font-size: 1rem; color:cornflowerblue;"></i> {{Student.age}} years old</li>
+                                <!-- <li><i class="bi bi-telephone-fill"
+                                    style="font-size: 1rem; color:rgb(240, 240, 64);"></i> {{Student}}</li> -->
+                                <!-- <li><i class="bi bi-info-circle-fill"
+                                    style="font-size: 1rem; color:cornflowerblue;"></i> {{Student.age}} years old</li> -->
                               </ul>
                             </div>
                           </div>
                         </div>
                       </td>
-                      <td><span class="badge badge-success">{{Student.proffesion}}</span></td>
+                      <!-- <td><span class="badge badge-success">{{Student.proffesion}}</span></td> -->
                       <td>
-                        {{Student.email}}
+                        <!-- {{Student.email}} -->
                       </td>
                       <td>
                         <ul class="list-unstyled mb-0 d-flex justify-content-end">
-                          <li><span id="boot-icon" class="bi bi-trash-fill"
-                              style="font-size: 1.2rem; color: rgb(255, 0, 0);" (click)="OnDeletedStudent(Student)"></span></li>
+                          <!-- <li><span id="boot-icon" class="bi bi-trash-fill"
+                              style="font-size: 1.2rem; color: rgb(255, 0, 0);" (click)="OnDeletedStudent(Student)"></span></li> -->
                           <li><span id="boot-icon" class="bi bi-pencil-fill"
                               style="font-size: 1.2rem; color: rgb(73, 219, 32);"></span></li>
-                          <li><span id="boot-icon" class="bi bi-eye-fill"
-                              style="font-size: 1.2rem; color:cornflowerblue;" [routerLink]="['/viewStudent', Student.id]"></span></li>
+                          <!-- <li><span id="boot-icon" class="bi bi-eye-fill"
+                              style="font-size: 1.2rem; color:cornflowerblue;" [routerLink]="['/viewStudent', Student.id]"></span></li> -->
                         </ul>
                       </td>
                     </tr>
